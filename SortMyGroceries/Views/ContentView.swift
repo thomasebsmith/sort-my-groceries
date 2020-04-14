@@ -10,7 +10,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            ListOfListsView(lists: [
+                GroceryList(name: "Test 1", items: []),
+                GroceryList(name: "Test 2", items: [])
+            ])
+        }
     }
 }
 
