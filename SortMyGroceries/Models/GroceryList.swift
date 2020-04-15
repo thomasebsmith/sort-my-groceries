@@ -9,10 +9,11 @@
 import Foundation
 
 struct GroceryList: Hashable {
+    typealias Location = String
     var name: String
     var items: [GroceryItem]
-    func sortedByLocation() -> [String: [(Int, GroceryItem)]] {
-        var sorted: [String: [(Int, GroceryItem)]] = [:]
+    func sortedByLocation() -> [Location: [(Int, GroceryItem)]] {
+        var sorted: [Location: [(Int, GroceryItem)]] = [:]
         for (i, item) in items.enumerated() {
             if sorted[item.location] == nil {
                 sorted[item.location] = []
@@ -20,5 +21,8 @@ struct GroceryList: Hashable {
             sorted[item.location]?.append((i, item))
         }
         return sorted
+    }
+    var locations: Set<Location> {
+        return Set(items.map { $0.location })
     }
 }
