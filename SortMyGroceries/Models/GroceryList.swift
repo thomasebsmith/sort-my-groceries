@@ -25,4 +25,17 @@ struct GroceryList: Hashable {
     var locations: Set<Location> {
         return Set(items.map { $0.location })
     }
+    func autocomplete(location: Location) -> Location? {
+        let location = location.localizedCapitalized
+        var possibleMatches: [Location: Int] = [:]
+        for item in items {
+            if item.location.starts(with: location) {
+                if possibleMatches[item.location] == nil {
+                    possibleMatches[item.location] = 0
+                }
+                possibleMatches[item.location]! += 1
+            }
+        }
+        return possibleMatches.max(by: <)?.key
+    }
 }
