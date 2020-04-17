@@ -12,9 +12,20 @@ struct NewItemView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var list: GroceryList
     @State var itemName = ""
-    @State var itemLocation = ""
+    @State var selectedLocation: Int = 0
+    @State var typedLocation = ""
+    init(list: Binding<GroceryList>) {
+        self._list = list
+        self._selectedLocation = State(initialValue: self.list.locations.count)
+    }
+    var otherSelected: Bool {
+        return selectedLocation == list.locations.count
+    }
     func getNewItem() -> GroceryItem {
-        return GroceryItem(name: itemName, location: itemLocation)
+        if otherSelected {
+            return GroceryItem(name: itemName, location: typedLocation)
+        }
+        return GroceryItem(name: itemName, location: list.locations.sorted()[selectedLocation])
     }
     var body: some View {
         VStack {
@@ -29,7 +40,15 @@ struct NewItemView: View {
                 }, label: { Text("Add").bold() })
             }
             TextField("Name", text: self.$itemName).padding()
-            TextField("Location", text: self.$itemLocation).padding()
+            Picker(selection: self.$selectedLocation, label: Text("Location")) {
+                ForEach(self.list.locations.sorted().indices, id: \.self) { i in
+                    Text(self.list.locations.sorted()[i]).tag(i)
+                }
+                Text("Other...").tag(self.list.locations.count)
+            }.labelsHidden()
+            if otherSelected {
+                TextField("Other location", text: self.$typedLocation).padding()
+            }
             Spacer()
         }.padding()
     }
