@@ -11,10 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            ListOfListsView(lists: [
-                GroceryList(name: "Test 1", items: []),
-                GroceryList(name: "Test 2", items: [])
-            ])
+            ListOfListsView(lists: [])
         }
     }
 }

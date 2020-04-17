@@ -11,7 +11,7 @@ import SwiftUI
 struct ListView: View {
     @Binding var list: GroceryList
     @State var showNewItem = false
-    @State var editMode = EditMode.inactive
+    var editList = GroceryList(name: "", items: [])
     func transform(_ indices: IndexSet, with: [(Int, GroceryItem)]) -> IndexSet {
         var result = IndexSet()
         indices.forEach { index in result.insert(with[index].0) }
@@ -32,13 +32,15 @@ struct ListView: View {
                         }
                     }
                     .onMove { src, dest in
-                        self.list.items.move(
-                            fromOffsets: self.transform(src, with: byLocation[location]!),
-                            toOffset: byLocation[location]![dest].0
-                        )
+                        if let category = byLocation[location],
+                               dest < category.count {
+                            self.list.items.move(
+                                fromOffsets: self.transform(src, with: category),
+                                toOffset: category[dest].0
+                            )
+                        }
                     }
                 }
-                .environment(\.editMode, self.$editMode)
             }
         }
         .navigationBarTitle(list.name)
