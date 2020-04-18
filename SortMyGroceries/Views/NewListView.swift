@@ -25,6 +25,11 @@ struct NewListView: View {
                 Spacer()
                 Button(action: {
                     self.lists.append(self.getNewList())
+                    do {
+                        try self.context.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: { Text("Add").bold() })
             }

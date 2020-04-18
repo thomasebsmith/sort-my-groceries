@@ -29,7 +29,14 @@ struct ListView: View {
                     }
                     .onDelete { indices in
                         self.transform(indices, with: byLocation[location]!).forEach { index in
-                            self.list.items.remove(at: index)
+                            if index < self.list.items.count {
+                                self.list.items.remove(at: index)
+                            }
+                        }
+                        do {
+                            try self.context.save()
+                        } catch {
+                            fatalError("Failure to save context: \(error)")
                         }
                     }
                     .onMove { src, dest in
@@ -39,6 +46,11 @@ struct ListView: View {
                                 fromOffsets: self.transform(src, with: category),
                                 toOffset: category[dest].0
                             )
+                        }
+                        do {
+                            try self.context.save()
+                        } catch {
+                            fatalError("Failure to save context: \(error)")
                         }
                     }
                 }
@@ -50,7 +62,12 @@ struct ListView: View {
             Button(action: {
                 self.showNewItem = true
             }, label: {
-                Image(systemName: "plus")
+                Image(systemName: "plus").padding(EdgeInsets(
+                    top: 0.0,
+                    leading: 10.0,
+                    bottom: 0.0,
+                    trailing: 0.0
+                ))
             })
         })
         .popover(isPresented: self.$showNewItem) {

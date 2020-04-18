@@ -23,8 +23,14 @@ struct ListOfListsView: View {
                 for i in indices {
                     self.lists.remove(at: i)
                 }
+                do {
+                    try self.context.save()
+                } catch {
+                    fatalError("Failure to save context: \(error)")
+                }
             }
             .onMove { src, dest in
+                // TODO
                 self.lists.move(
                     fromOffsets: src,
                     toOffset: dest
@@ -37,7 +43,12 @@ struct ListOfListsView: View {
             Button(action: {
                 self.showNewList = true
             }, label: {
-                Image(systemName: "plus")
+                Image(systemName: "plus").padding(EdgeInsets(
+                    top: 0.0,
+                    leading: 10.0,
+                    bottom: 0.0,
+                    trailing: 0.0
+                ))
             })
         })
         .popover(isPresented: self.$showNewList) {

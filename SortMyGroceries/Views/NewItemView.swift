@@ -39,6 +39,11 @@ struct NewItemView: View {
                 Spacer()
                 Button(action: {
                     self.list.items.append(self.getNewItem())
+                    do {
+                        try self.context.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: { Text("Add").bold() })
             }
