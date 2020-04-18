@@ -18,7 +18,13 @@
 		E94F829A24450A9200AF2F34 /* GroceryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F829924450A9200AF2F34 /* GroceryList.swift */; };
 		E94F829C24450A9600AF2F34 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F829B24450A9600AF2F34 /* GroceryItem.swift */; };
 		E94F829E24450CEC00AF2F34 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F829D24450CEC00AF2F34 /* ListView.swift */; };
+		E963F9BC244B7244009DA66D /* ItemLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963F9BB244B7244009DA66D /* ItemLocations.swift */; };
+		E963F9BE244B72F8009DA66D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963F9BD244B72F8009DA66D /* Location.swift */; };
+		E975060D244B74C500ECB285 /* GroceryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975060C244B74C500ECB285 /* GroceryStore.swift */; };
 		E98D60B32445130B00A9DB55 /* NewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D60B22445130B00A9DB55 /* NewItemView.swift */; };
+		E9B7196F244B9C6200388571 /* LocationSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B7196E244B9C6200388571 /* LocationSelectorView.swift */; };
+		E9B71971244BA1DF00388571 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B71970244BA1DF00388571 /* Config.swift */; };
+		E9B71977244BA94F00388571 /* LocationsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B71976244BA94F00388571 /* LocationsSelectorView.swift */; };
 		E9F04F04244A52E700CA5C0D /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F04F03244A52E700CA5C0D /* NewListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +42,13 @@
 		E94F829924450A9200AF2F34 /* GroceryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryList.swift; sourceTree = "<group>"; };
 		E94F829B24450A9600AF2F34 /* GroceryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		E94F829D24450CEC00AF2F34 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		E963F9BB244B7244009DA66D /* ItemLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLocations.swift; sourceTree = "<group>"; };
+		E963F9BD244B72F8009DA66D /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		E975060C244B74C500ECB285 /* GroceryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryStore.swift; sourceTree = "<group>"; };
 		E98D60B22445130B00A9DB55 /* NewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemView.swift; sourceTree = "<group>"; };
+		E9B7196E244B9C6200388571 /* LocationSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectorView.swift; sourceTree = "<group>"; };
+		E9B71970244BA1DF00388571 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		E9B71976244BA94F00388571 /* LocationsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSelectorView.swift; sourceTree = "<group>"; };
 		E9F04F03244A52E700CA5C0D /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,8 +106,12 @@
 		E94F829724450A7700AF2F34 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E9B71970244BA1DF00388571 /* Config.swift */,
 				E94F829924450A9200AF2F34 /* GroceryList.swift */,
 				E94F829B24450A9600AF2F34 /* GroceryItem.swift */,
+				E963F9BD244B72F8009DA66D /* Location.swift */,
+				E963F9BB244B7244009DA66D /* ItemLocations.swift */,
+				E975060C244B74C500ECB285 /* GroceryStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -105,6 +121,8 @@
 			children = (
 				E94F829524450A3B00AF2F34 /* ListOfListsView.swift */,
 				E94F829D24450CEC00AF2F34 /* ListView.swift */,
+				E9B7196E244B9C6200388571 /* LocationSelectorView.swift */,
+				E9B71976244BA94F00388571 /* LocationsSelectorView.swift */,
 				E98D60B22445130B00A9DB55 /* NewItemView.swift */,
 				E9F04F03244A52E700CA5C0D /* NewListView.swift */,
 				E94F8285244509BF00AF2F34 /* ContentView.swift */,
@@ -183,8 +201,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9B7196F244B9C6200388571 /* LocationSelectorView.swift in Sources */,
 				E98D60B32445130B00A9DB55 /* NewItemView.swift in Sources */,
+				E9B71971244BA1DF00388571 /* Config.swift in Sources */,
 				E94F829E24450CEC00AF2F34 /* ListView.swift in Sources */,
+				E963F9BC244B7244009DA66D /* ItemLocations.swift in Sources */,
 				E94F827F244509BF00AF2F34 /* AppDelegate.swift in Sources */,
 				E94F8284244509BF00AF2F34 /* SortMyGroceries.xcdatamodeld in Sources */,
 				E94F8286244509BF00AF2F34 /* ContentView.swift in Sources */,
@@ -192,6 +213,9 @@
 				E94F829C24450A9600AF2F34 /* GroceryItem.swift in Sources */,
 				E94F829624450A3B00AF2F34 /* ListOfListsView.swift in Sources */,
 				E94F829A24450A9200AF2F34 /* GroceryList.swift in Sources */,
+				E975060D244B74C500ECB285 /* GroceryStore.swift in Sources */,
+				E963F9BE244B72F8009DA66D /* Location.swift in Sources */,
+				E9B71977244BA94F00388571 /* LocationsSelectorView.swift in Sources */,
 				E9F04F04244A52E700CA5C0D /* NewListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

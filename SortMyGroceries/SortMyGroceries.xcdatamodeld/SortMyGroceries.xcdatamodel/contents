@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Config" representedClassName="Config" syncable="YES">
+        <attribute name="currentStore" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="GroceryItem" representedClassName="GroceryItem" syncable="YES">
-        <attribute name="location" attributeType="String" defaultValueString=""/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
     </entity>
     <entity name="GroceryList" representedClassName="GroceryList" syncable="YES">
         <attribute name="items" optional="YES" attributeType="Transformable" valueTransformerName="GroceryItemTransformer" customClassName="[GroceryItem]"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
     </entity>
+    <entity name="GroceryStore" representedClassName="GroceryStore" syncable="YES">
+        <attribute name="itemLocations" optional="YES" attributeType="Transformable" valueTransformerName="ItemLocationsTransformer" customClassName="ItemLocations"/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+    </entity>
     <elements>
-        <element name="GroceryItem" positionX="-54" positionY="9" width="128" height="73"/>
+        <element name="GroceryItem" positionX="-54" positionY="9" width="128" height="28"/>
         <element name="GroceryList" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="GroceryStore" positionX="-54" positionY="9" width="128" height="28"/>
+        <element name="Config" positionX="-54" positionY="0" width="128" height="58"/>
     </elements>
 </model>

@@ -11,6 +11,8 @@ import SwiftUI
 struct ListView: View {
     @Environment(\.managedObjectContext) var context
     @Binding var list: GroceryList
+    @Binding var stores: [GroceryStore]
+    @Binding var config: Config
     @State var showNewItem = false
     lazy var editList = GroceryList(name: "", items: [], context: context)
     func transform(_ indices: IndexSet, with: [(Int, GroceryItem)]) -> IndexSet {
@@ -19,9 +21,10 @@ struct ListView: View {
         return result
     }
     var body: some View {
-        let byLocation = list.sortedByLocation()
+        let locations = config.store(for: stores)?.itemLocations ?? ItemLocations()
+        let byLocation = list.sortedByLocation(locations: locations)
         return ForEach(byLocation.keys.sorted(), id: \.self) { location in
-            Section(header: Text(location).bold()) {
+            Section(header: Text(location.text).bold()) {
                 List {
                     ForEach(byLocation[location]!.map { pair in pair.1 },
                              id: \.self) { item in
@@ -71,21 +74,20 @@ struct ListView: View {
             })
         })
         .popover(isPresented: self.$showNewItem) {
-            NewItemView(list: self.$list).environment(\.managedObjectContext, self.context)
+            NewItemView(list: self.$list, stores: self.$stores)
+                .environment(\.managedObjectContext, self.context)
         }
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     @Environment(\.managedObjectContext) static var context
-    static var theList = GroceryList(name: "Test", items: [], context: context)
-    static var binding = Binding<GroceryList>(
-        get: { theList },
-        set: { newList in
-            theList = newList
-        }
-    )
+    @State static var theList = GroceryList(name: "Test", items: [], context: context)
+    @State static var stores = [
+        GroceryStore(name: "Test Store", context: context)
+    ]
+    @State static var config = Config(context: context)
     static var previews: some View {
-        ListView(list: binding)
+        ListView(list: $theList, stores: $stores, config: $config)
     }
 }

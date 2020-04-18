@@ -10,7 +10,6 @@ import CoreData
 
 @objc(GroceryList)
 class GroceryList: NSManagedObject {
-    typealias Location = String
     @NSManaged var name: String
     @NSManaged var items: [GroceryItem]
     init(name: String, items: [GroceryItem], context: NSManagedObjectContext) {
@@ -22,31 +21,15 @@ class GroceryList: NSManagedObject {
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }
-    func sortedByLocation() -> [Location: [(Int, GroceryItem)]] {
+    func sortedByLocation(locations: ItemLocations) -> [Location: [(Int, GroceryItem)]] {
         var sorted: [Location: [(Int, GroceryItem)]] = [:]
         for (i, item) in items.enumerated() {
-            if sorted[item.location] == nil {
-                sorted[item.location] = []
+            if sorted[item.locationIn(locations)] == nil {
+                sorted[item.locationIn(locations)] = []
             }
-            sorted[item.location]?.append((i, item))
+            sorted[item.locationIn(locations)]?.append((i, item))
         }
         return sorted
-    }
-    var locations: Set<Location> {
-        return Set(items.map { $0.location })
-    }
-    func autocomplete(location: Location) -> Location? {
-        let location = location.localizedCapitalized
-        var possibleMatches: [Location: Int] = [:]
-        for item in items {
-            if item.location.starts(with: location) {
-                if possibleMatches[item.location] == nil {
-                    possibleMatches[item.location] = 0
-                }
-                possibleMatches[item.location]! += 1
-            }
-        }
-        return possibleMatches.max(by: <)?.key
     }
     static func fetchAll() -> NSFetchRequest<GroceryList> {
         let request = GroceryList.fetchRequest() as! NSFetchRequest<GroceryList>

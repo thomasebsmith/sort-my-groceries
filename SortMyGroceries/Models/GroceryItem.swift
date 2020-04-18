@@ -12,12 +12,16 @@ import UIKit
 @objc(GroceryItem)
 class GroceryItem: NSManagedObject, NSCoding {
     @NSManaged var name: String
-    @NSManaged var location: String
-    init(name: String, location: String, context: NSManagedObjectContext) {
+    init(name: String, context: NSManagedObjectContext) {
         let entity = NSEntityDescription.entity(forEntityName: "GroceryItem", in: context)!
         super.init(entity: entity, insertInto: context)
         self.name = name
-        self.location = location.localizedCapitalized
+    }
+    func locationIn(_ store: GroceryStore) -> Location {
+        return store.itemLocations.locations[self] ?? Location("")
+    }
+    func locationIn(_ locations: ItemLocations) -> Location {
+        return locations.locations[self] ?? Location("")
     }
     required init?(coder: NSCoder) {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -26,21 +30,18 @@ class GroceryItem: NSManagedObject, NSCoding {
         let context = delegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "GroceryItem", in: context)!
         super.init(entity: entity, insertInto: context)
-        if let name = coder.decodeObject(forKey: "name") as? String,
-           let location = coder.decodeObject(forKey: "location") as? String {
+        if let name = coder.decodeObject(forKey: "name") as? String {
             self.name = name
-            self.location = location
         }
     }
     func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
-        coder.encode(location, forKey: "location")
     }
 }
 
 class GroceryItemTransformer: ValueTransformer {
     override class func transformedValueClass() -> AnyClass {
-        return GroceryList.self
+        return GroceryItem.self
     }
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         guard let list = value as? GroceryItem else {

@@ -11,11 +11,17 @@ import SwiftUI
 struct ListOfListsView: View {
     @Environment(\.managedObjectContext) var context
     @State var lists: [GroceryList]
+    @State var stores: [GroceryStore]
+    @State var config: Config
     @State var showNewList = false
     var body: some View {
         List {
             ForEach(lists.indices, id: \.self) { i in
-                NavigationLink(destination: ListView(list: self.$lists[i])) {
+                NavigationLink(destination: ListView(
+                    list: self.$lists[i],
+                    stores: self.$stores,
+                    config: self.$config)
+                ) {
                     Text(self.lists[i].name)
                 }
             }
@@ -61,8 +67,11 @@ struct ListOfListsView_Previews: PreviewProvider {
     @Environment(\.managedObjectContext) static var context
     static var previews: some View {
         ListOfListsView(lists: [
-            GroceryList(name: "List 1", items: [], context: context),
-            GroceryList(name: "List 2", items: [], context: context)
-        ])
+                GroceryList(name: "List 1", items: [], context: context),
+                GroceryList(name: "List 2", items: [], context: context)
+            ], stores: [
+                GroceryStore(name: "Store 1", context: context)
+            ], config: Config(context: context)
+        )
     }
 }
