@@ -5,7 +5,7 @@
         <attribute name="name" attributeType="String" defaultValueString=""/>
     </entity>
     <entity name="GroceryList" representedClassName="GroceryList" syncable="YES">
-        <attribute name="items" optional="YES" attributeType="Transformable" valueTransformerName="NSValueTransformer" customClassName="[GroceryItem]"/>
+        <attribute name="items" optional="YES" attributeType="Transformable" valueTransformerName="GroceryItemTransformer" customClassName="[GroceryItem]"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
     </entity>
     <elements>

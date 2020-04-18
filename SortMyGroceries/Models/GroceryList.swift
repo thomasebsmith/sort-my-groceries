@@ -19,6 +19,9 @@ class GroceryList: NSManagedObject {
         self.name = name
         self.items = items
     }
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
     func sortedByLocation() -> [Location: [(Int, GroceryItem)]] {
         var sorted: [Location: [(Int, GroceryItem)]] = [:]
         for (i, item) in items.enumerated() {
@@ -44,5 +47,10 @@ class GroceryList: NSManagedObject {
             }
         }
         return possibleMatches.max(by: <)?.key
+    }
+    static func fetchAll() -> NSFetchRequest<GroceryList> {
+        let request = GroceryList.fetchRequest() as! NSFetchRequest<GroceryList>
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        return request
     }
 }

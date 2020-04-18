@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @FetchRequest(fetchRequest: GroceryList.fetchAll()) var lists: FetchedResults<GroceryList>
     var body: some View {
         NavigationView {
-            ListOfListsView(lists: [])
+            ListOfListsView(lists: lists.sorted { $0.name < $1.name })
         }
     }
 }
