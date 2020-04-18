@@ -10,10 +10,11 @@ import SwiftUI
 
 struct NewListView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var context
     @Binding var lists: [GroceryList]
     @State var listName = ""
     func getNewList() -> GroceryList {
-        return GroceryList(name: listName, items: [])
+        return GroceryList(name: listName, items: [], context: context)
     }
     var body: some View {
         VStack {

@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ListOfListsView: View {
+    @Environment(\.managedObjectContext) var context
     @State var lists: [GroceryList]
     @State var showNewList = false
     var body: some View {
@@ -40,16 +41,17 @@ struct ListOfListsView: View {
             })
         })
         .popover(isPresented: self.$showNewList) {
-            NewListView(lists: self.$lists)
+            NewListView(lists: self.$lists).environment(\.managedObjectContext, self.context)
         }
     }
 }
 
 struct ListOfListsView_Previews: PreviewProvider {
+    @Environment(\.managedObjectContext) static var context
     static var previews: some View {
         ListOfListsView(lists: [
-            GroceryList(name: "List 1", items: []),
-            GroceryList(name: "List 2", items: [])
+            GroceryList(name: "List 1", items: [], context: context),
+            GroceryList(name: "List 2", items: [], context: context)
         ])
     }
 }

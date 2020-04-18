@@ -6,10 +6,15 @@
 //  Copyright © 2020 Thomas Smith. All rights reserved.
 //
 
-struct GroceryItem: Hashable {
-    var name: String
-    var location: String
-    init(name: String, location: String) {
+import CoreData
+
+@objc(GroceryItem)
+class GroceryItem: NSManagedObject {
+    @NSManaged var name: String
+    @NSManaged var location: String
+    init(name: String, location: String, context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "GroceryItem", in: context)!
+        super.init(entity: entity, insertInto: context)
         self.name = name
         self.location = location.localizedCapitalized
     }

@@ -9,9 +9,10 @@
 import SwiftUI
 
 struct ListView: View {
+    @Environment(\.managedObjectContext) var context
     @Binding var list: GroceryList
     @State var showNewItem = false
-    var editList = GroceryList(name: "", items: [])
+    lazy var editList = GroceryList(name: "", items: [], context: context)
     func transform(_ indices: IndexSet, with: [(Int, GroceryItem)]) -> IndexSet {
         var result = IndexSet()
         indices.forEach { index in result.insert(with[index].0) }
@@ -53,13 +54,14 @@ struct ListView: View {
             })
         })
         .popover(isPresented: self.$showNewItem) {
-            NewItemView(list: self.$list)
+            NewItemView(list: self.$list).environment(\.managedObjectContext, self.context)
         }
     }
 }
 
 struct ListView_Previews: PreviewProvider {
-    static var theList = GroceryList(name: "Test", items: [])
+    @Environment(\.managedObjectContext) static var context
+    static var theList = GroceryList(name: "Test", items: [], context: context)
     static var binding = Binding<GroceryList>(
         get: { theList },
         set: { newList in

@@ -6,8 +6,9 @@
 //  Copyright © 2020 Thomas Smith. All rights reserved.
 //
 
-import UIKit
+import CoreData
 import SwiftUI
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

@@ -6,12 +6,19 @@
 //  Copyright © 2020 Thomas Smith. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
-struct GroceryList: Hashable {
+@objc(GroceryList)
+class GroceryList: NSManagedObject {
     typealias Location = String
-    var name: String
-    var items: [GroceryItem]
+    @NSManaged var name: String
+    @NSManaged var items: [GroceryItem]
+    init(name: String, items: [GroceryItem], context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: context)!
+        super.init(entity: entity, insertInto: context)
+        self.name = name
+        self.items = items
+    }
     func sortedByLocation() -> [Location: [(Int, GroceryItem)]] {
         var sorted: [Location: [(Int, GroceryItem)]] = [:]
         for (i, item) in items.enumerated() {

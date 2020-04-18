@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct NewItemView: View {
+    @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     @Binding var list: GroceryList
     @State var itemName = ""
@@ -23,9 +24,11 @@ struct NewItemView: View {
     }
     func getNewItem() -> GroceryItem {
         if otherSelected {
-            return GroceryItem(name: itemName, location: typedLocation)
+            return GroceryItem(name: itemName, location: typedLocation, context: context)
         }
-        return GroceryItem(name: itemName, location: list.locations.sorted()[selectedLocation])
+        return GroceryItem(name: itemName,
+                           location: list.locations.sorted()[selectedLocation],
+                           context: context)
     }
     var body: some View {
         VStack {
@@ -55,7 +58,8 @@ struct NewItemView: View {
 }
 
 struct NewItemView_Previews: PreviewProvider {
-    @State static var list = GroceryList(name: "Test list", items: [])
+    @Environment(\.managedObjectContext) static var context
+    @State static var list = GroceryList(name: "Test list", items: [], context: context)
     static var previews: some View {
         NewItemView(list: $list)
     }
