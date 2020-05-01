@@ -7,3 +7,7 @@ to make shopping trips easier.
 ## Technologies
 Sort My Groceries is written in SwiftUI and is currently using the Swift 5.x
 SDK.
+
+## Project Status
+This project is under early development. As such, it is not yet stable. Use at
+your own risk.
