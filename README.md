@@ -1,7 +1,8 @@
 # Sort My Groceries
 Sort My Groceries is an iOS app designed to make grocery shopping easier
-and more enjoyable. You can create lists, add items to your lists, and
-add a location for each item. Groceries are automatically sorted by location
+and more enjoyable. You can create lists and stores, add items to your lists,
+and add a location for each item within a given store.
+Groceries are automatically sorted by location within a selected store
 to make shopping trips easier.
 
 ## Technologies
