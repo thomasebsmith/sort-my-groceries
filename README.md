@@ -18,4 +18,5 @@ your own risk.
 - Ability to create stores
 - Ability to create lists
 - Ability to add items to stores and lists
+- Ability to edit and delete items in stores and lists
 - Ability to view lists sorted by location in a currently selected store
