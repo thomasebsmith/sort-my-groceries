@@ -13,11 +13,15 @@ import UIKit
 class Config: NSManagedObject {
     @NSManaged private var currentStore: Int64
     init(context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "Config", in: context)!
+        let entity = NSEntityDescription.entity(
+            forEntityName: "Config",
+            in: context
+        )!
         super.init(entity: entity, insertInto: context)
         self.currentStore = 0
     }
-    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    override init(entity: NSEntityDescription,
+                  insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }
     func store(for stores: [GroceryStore]) -> GroceryStore? {
@@ -28,7 +32,9 @@ class Config: NSManagedObject {
     }
     static func fetchAll() -> NSFetchRequest<Config> {
         let request = Config.fetchRequest() as! NSFetchRequest<Config>
-        request.sortDescriptors = [NSSortDescriptor(key: "currentStore", ascending: true)]
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "currentStore", ascending: true)
+        ]
         return request
     }
 }
