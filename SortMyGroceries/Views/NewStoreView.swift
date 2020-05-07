@@ -1,5 +1,5 @@
 //
-//  NewListView.swift
+//  NewStoreView.swift
 //  SortMyGroceries
 //
 //  Created by Thomas Smith on 4/17/20.
@@ -8,13 +8,14 @@
 
 import SwiftUI
 
-struct NewListView: View {
+struct NewStoreView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var context
-    @Binding var lists: [GroceryList]
-    @State var listName = ""
-    func getNewList() -> GroceryList {
-        return GroceryList(name: listName, items: [], context: context)
+    @Binding var stores: [GroceryStore]
+    @Binding var config: Config
+    @State var storeName = ""
+    func getNewStore() -> GroceryStore {
+        return GroceryStore(name: storeName, context: context)
     }
     var body: some View {
         VStack {
@@ -23,10 +24,13 @@ struct NewListView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: { Text("Cancel") })
                 Spacer()
-                Text("New List").bold()
+                Text("New Store").bold()
                 Spacer()
                 Button(action: {
-                    self.lists.append(self.getNewList())
+                    if self.config.store(for: self.stores) == nil {
+                        self.config.setCurrentStore(0)
+                    }
+                    self.stores.append(self.getNewStore())
                     do {
                         try self.context.save()
                     } catch {
@@ -35,15 +39,17 @@ struct NewListView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: { Text("Add").bold() })
             }
-            TextField("Name", text: self.$listName).padding()
+            TextField("Name", text: self.$storeName).padding()
             Spacer()
         }.padding()
     }
 }
 
-struct NewListView_Previews: PreviewProvider {
-    @State static var lists: [GroceryList] = []
+struct NewStoreView_Previews: PreviewProvider {
+    @Environment(\.managedObjectContext) static var context
+    @State static var stores: [GroceryStore] = []
+    @State static var config = Config(context: context)
     static var previews: some View {
-        NewListView(lists: $lists)
+        NewStoreView(stores: $stores, config: $config)
     }
 }

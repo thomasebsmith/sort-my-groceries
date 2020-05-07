@@ -30,6 +30,9 @@ class Config: NSManagedObject {
         }
         return nil
     }
+    func setCurrentStore(_ index: Int) {
+        currentStore = Int64(index)
+    }
     static func fetchAll() -> NSFetchRequest<Config> {
         let request = Config.fetchRequest() as! NSFetchRequest<Config>
         request.sortDescriptors = [
