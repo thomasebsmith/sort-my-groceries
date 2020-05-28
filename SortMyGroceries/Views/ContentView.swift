@@ -16,10 +16,12 @@ struct ContentView: View {
     @FetchRequest(fetchRequest: Config.fetchAll()) var configs: FetchedResults<Config>
     func newConfig() -> Config {
         let config = Config(context: context)
-        do {
-            try context.save()
-        } catch {
-            fatalError("Failed to save context: \(error)")
+        DispatchQueue.global(qos: .background).async {
+            do {
+                try self.context.save()
+            } catch {
+                fatalError("Failed to save context: \(error)")
+            }
         }
         return config
     }
