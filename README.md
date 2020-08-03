@@ -20,3 +20,6 @@ your own risk.
 - Ability to add items to stores and lists
 - Ability to edit and delete items in stores and lists
 - Ability to view lists sorted by location in a currently selected store
+
+##### v0.2 (future)
+- Upgrade to latest version of Swift UI
